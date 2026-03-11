@@ -76,23 +76,24 @@
             "f21bd5ab-d24d-4a4a-b09c-d09d4361148b"
         ];
 
-        function playRandom() {
-            const randomId = episodes[Math.floor(Math.random() * episodes.length)];
-            
-            // Der "Intent"-Link ist die Wunderwaffe für Android
-            const intentUrl = "intent://www.disneyplus.com/video/" + randomId + "#Intent;package=com.disney.disneyplus;scheme=https;end";
-            const fallbackUrl = "https://www.disneyplus.com/video/" + randomId;
+       function playRandom() {
+    const randomId = episodes[Math.floor(Math.random() * episodes.length)];
+    
+    // Wir versuchen den direkten App-Befehl
+    const appUrl = "disneyplus://video/" + randomId;
+    const webUrl = "https://www.disneyplus.com/video/" + randomId;
 
-            // Wir versuchen erst den Intent, falls das Handy den Link nicht frisst, nutzen wir den normalen Link
-            window.location.replace(intentUrl);
-            
-            // Fallback nach 500ms, falls die App nicht aufging
-            setTimeout(() => {
-                window.location.href = fallbackUrl;
-            }, 500);
-        }
+    // Wir versuchen die App direkt zu rufen
+    window.location.href = appUrl;
+
+    // Falls nach 1 Sekunde nichts passiert ist, lade die Website als Notlösung
+    setTimeout(function() {
+        window.location.href = webUrl;
+    }, 1000);
+}
 
         window.onload = playRandom;
     </script>
 </body>
 </html>
+
