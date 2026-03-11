@@ -97,13 +97,19 @@
 
        function playRandom() {
     const randomId = episodes[Math.floor(Math.random() * episodes.length)];
-    // Wir nutzen hier das direkte https-Format, das Android als App-Link erkennt
-    const targetUrl = "https://www.disneyplus.com/video/" + randomId;
     
-    // Kleiner Trick: Wir "täuschen" eine Benutzerinteraktion vor
-    window.location.assign(targetUrl);
+    // Wir probieren drei Wege nacheinander:
+    // 1. Der klassische Link (den wir schon hatten)
+    const webUrl = "https://www.disneyplus.com/video/" + randomId;
+    
+    // 2. Der "Intent"-Link (Speziell für Android, um die App zu erzwingen)
+    const intentUrl = "intent://www.disneyplus.com/video/" + randomId + "#Intent;package=com.disney.disneyplus;scheme=https;end";
+
+    // Wir feuern den Intent-Link ab
+    window.location.replace(intentUrl);
 }
     </script>
 </body>
 
 </html>
+
