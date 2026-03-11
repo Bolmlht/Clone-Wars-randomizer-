@@ -95,14 +95,15 @@
             "f21bd5ab-d24d-4a4a-b09c-d09d4361148b"
         ];
 
-        // Die Funktion, die würfelt und weiterleitet
-        function startRoulette() {
-            const randomId = episodes[Math.floor(Math.random() * episodes.length)];
-            window.location.replace("https://www.disneyplus.com/video/" + randomId);
-        }
-
-        // AUTO-START: Wird ausgeführt, sobald die Seite geladen ist
-        window.onload = startRoulette;
+       function playRandom() {
+    const randomId = episodes[Math.floor(Math.random() * episodes.length)];
+    // Wir nutzen hier das direkte https-Format, das Android als App-Link erkennt
+    const targetUrl = "https://www.disneyplus.com/video/" + randomId;
+    
+    // Kleiner Trick: Wir "täuschen" eine Benutzerinteraktion vor
+    window.location.assign(targetUrl);
+}
     </script>
 </body>
+
 </html>
