@@ -1,29 +1,10 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clone Wars Roulette</title>
-    
-    <link rel="apple-touch-icon" href="https://de.wikipedia.org/wiki/Star_Wars:_The_Clone_Wars_%28Fernsehserie%29#/media/Datei:Clonewars-logo.svg">
-    <link rel="icon" type="image/png" href="https://de.wikipedia.org/wiki/Star_Wars:_The_Clone_Wars_%28Fernsehserie%29#/media/Datei:Clonewars-logo.svg">
-    
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#000000">
-
-    <style>
-        body { background: #000; margin: 0; }
-    </style>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clone Wars Roulette</title>
-    <style>
-        /* Schwarzer Hintergrund, damit es beim Laden nicht blendet */
-        body { background: #000; color: #000; margin: 0; }
-    </style>
+    <title>CW Roulette</title>
 </head>
-<body>
+<body style="background: #000;">
     <script>
         const episodes = [
             "0bf87f10-d9a1-44ca-8371-f38543eb3706", "5bb0c4dc-91f1-434b-974f-1716511ecd4e",
@@ -95,21 +76,23 @@
             "f21bd5ab-d24d-4a4a-b09c-d09d4361148b"
         ];
 
-       function playRandom() {
-    const randomId = episodes[Math.floor(Math.random() * episodes.length)];
-    
-    // Wir probieren drei Wege nacheinander:
-    // 1. Der klassische Link (den wir schon hatten)
-    const webUrl = "https://www.disneyplus.com/video/" + randomId;
-    
-    // 2. Der "Intent"-Link (Speziell für Android, um die App zu erzwingen)
-    const intentUrl = "intent://www.disneyplus.com/video/" + randomId + "#Intent;package=com.disney.disneyplus;scheme=https;end";
+        function playRandom() {
+            const randomId = episodes[Math.floor(Math.random() * episodes.length)];
+            
+            // Der "Intent"-Link ist die Wunderwaffe für Android
+            const intentUrl = "intent://www.disneyplus.com/video/" + randomId + "#Intent;package=com.disney.disneyplus;scheme=https;end";
+            const fallbackUrl = "https://www.disneyplus.com/video/" + randomId;
 
-    // Wir feuern den Intent-Link ab
-    window.location.replace(intentUrl);
-}
+            // Wir versuchen erst den Intent, falls das Handy den Link nicht frisst, nutzen wir den normalen Link
+            window.location.replace(intentUrl);
+            
+            // Fallback nach 500ms, falls die App nicht aufging
+            setTimeout(() => {
+                window.location.href = fallbackUrl;
+            }, 500);
+        }
+
+        window.onload = playRandom;
     </script>
 </body>
-
 </html>
-
