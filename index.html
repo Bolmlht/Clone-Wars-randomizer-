@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CW Roulette</title>
+    
+    <link rel="icon" type="image/png" href="https://de.wikipedia.org/wiki/Star_Wars:_The_Clone_Wars_%28Fernsehserie%29#/media/Datei:Clonewars-logo.svg">
+    <link rel="apple-touch-icon" href="https://de.wikipedia.org/wiki/Star_Wars:_The_Clone_Wars_%28Fernsehserie%29#/media/Datei:Clonewars-logo.svg">
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+
     <style>
         body { 
             background: #000; 
@@ -12,24 +20,26 @@
             align-items: center; 
             height: 100vh; 
             margin: 0; 
-            font-family: 'Arial', sans-serif;
+            font-family: 'Arial Black', sans-serif;
         }
         #launchBtn {
             background: #000;
             color: #ffe81f;
-            border: 2px solid #ffe81f;
-            padding: 25px 50px;
-            font-size: 1.5rem;
+            border: 3px solid #ffe81f;
+            padding: 30px 60px;
+            font-size: 1.8rem;
             font-weight: bold;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 0 15px rgba(255, 232, 31, 0.3);
+            letter-spacing: 3px;
+            box-shadow: 0 0 20px rgba(255, 232, 31, 0.4);
+            transition: all 0.2s ease;
         }
         #launchBtn:active {
             background: #ffe81f;
             color: #000;
+            transform: scale(0.95);
         }
     </style>
 </head>
@@ -116,11 +126,10 @@
             window.location.href = intentUrl;
 
             setTimeout(function() {
-                
                 if (!document.hidden) {
                     window.location.href = webUrl;
                 }
-            }, 1000);
+            }, 800);
         }
     </script>
 </body>
